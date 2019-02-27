@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TaskManagementApp
-{
-    class Task
+{    
+    public abstract class Task
     {
-        public enum CATEGORY { Home, Work, School, Leisure };
         public CATEGORY taskCategory;
         //title, description, category
         public string Title { get; set; }
