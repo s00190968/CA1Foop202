@@ -20,5 +20,10 @@ namespace TaskManagementApp
             Description = description;
             taskCategory = category;
         }
+
+        public override string ToString()
+        {
+            return string.Format($"{Title}/n{taskCategory}/n{Description}/n");
+        }
     }
 }

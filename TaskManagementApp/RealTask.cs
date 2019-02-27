@@ -17,5 +17,10 @@ namespace TaskManagementApp
             Priority = priority;
             DueDate = dueDate;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + string.Format($"Due: {DueDate.ToShortDateString()}/nPriority: {Priority}");
+        }
     }
 }
