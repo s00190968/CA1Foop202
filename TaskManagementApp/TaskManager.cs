@@ -15,6 +15,16 @@ namespace TaskManagementApp
         ObservableCollection<RealTask> filteredTasks;
         ObservableCollection<RealTask> completedTasks;
 
+        public TaskManager()
+        {
+            allTasks = new ObservableCollection<RealTask>();
+            filteredTasks = new ObservableCollection<RealTask>();
+            completedTasks = new ObservableCollection<RealTask>();
+
+            saveDataToJson();
+            loadDataFromJson();
+        }
+
         public void AddTask(string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge)
         {
             allTasks.Add(new RealTask(title, description, category, priority, dueDate, personInCharge));
@@ -23,6 +33,12 @@ namespace TaskManagementApp
         public void DeleteTask(RealTask task)
         {
             allTasks.Remove(task);
+        }
+
+        public void CompeleteTask(RealTask task)
+        {
+            completedTasks.Add(task);
+            DeleteTask(task);
         }
 
         public void EditTask(RealTask task, string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge)
