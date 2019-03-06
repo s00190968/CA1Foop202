@@ -8,16 +8,18 @@ namespace TaskManagementApp
 {    
     public abstract class Task
     {
-        public CATEGORY taskCategory;
         //title, description, category
+        public CATEGORY taskCategory;
         public string Title { get; set; }
         public string Description { get; set; }
+        public List<string> Labels;
 
         public Task(string title, string description, CATEGORY category)
         {
             Title = title;
             Description = description;
             taskCategory = category;
+            Labels = new List<string>();
         }
 
         public override string ToString()

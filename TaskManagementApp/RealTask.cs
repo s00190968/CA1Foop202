@@ -8,7 +8,7 @@ namespace TaskManagementApp
 {    
     public class RealTask:Task
     {
-        public PRIORITY_TYPES Priority { get; }
+        public PRIORITY_TYPES Priority { get; set; }
         public DateTime DueDate { get; set; }
         public string PersonInCharge { get; set; }
 

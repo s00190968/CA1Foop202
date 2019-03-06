@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace TaskManagementApp
 {
@@ -18,14 +20,54 @@ namespace TaskManagementApp
             allTasks.Add(new RealTask(title, description, category, priority, dueDate, personInCharge));
         }
 
-        public void DeleteTask()
+        public void DeleteTask(RealTask task)
         {
-
+            allTasks.Remove(task);
         }
 
-        public void EditTask()
+        public void EditTask(RealTask task, string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge)
         {
+            task.Title = title;
+            task.Description = description;
+            task.taskCategory = category;
+            task.Priority = priority;
+            task.DueDate = dueDate;
+            task.PersonInCharge = personInCharge;
+        }
 
+        #region saving and loading json file
+        public void saveDataToJson()
+        {
+            string json = JsonConvert.SerializeObject(allTasks, Formatting.Indented);
+
+            //write to file
+            using (StreamWriter sw = new StreamWriter(@"AllTasks.json"))//file should go to the bin folder of the solution
+            {
+                sw.Write(json);
+            }
+        }
+
+        public void loadDataFromJson()
+        {
+            //connect to a file
+            using (StreamReader sr = new StreamReader(@"AllTasks.json"))
+            {
+                //read from file
+                string json = sr.ReadToEnd();
+
+                //deserialize json/convert from
+                allTasks = JsonConvert.DeserializeObject<ObservableCollection<RealTask>>(json);
+            }
+        }
+
+        #endregion
+
+        public void addLabelsToTask(Task task, params string[]values)
+        {
+            foreach(string s in values)
+            {
+                task.Labels.Add(s);
+            }
         }
 
         #region task filtering
@@ -35,8 +77,18 @@ namespace TaskManagementApp
 
             foreach (RealTask t in allTasks)
             {
-                //if the date is same as date in task
-                if (t.DueDate == date)
+                //if the days are same
+                if (t.DueDate.Day == date.Day)
+                {
+                    temp.Add(t);
+                }
+                //if years are same
+                else if (t.DueDate.Year == date.Year)
+                {
+                    temp.Add(t);
+                }
+                //if months are same
+                else if (t.DueDate.Month == date.Month)
                 {
                     temp.Add(t);
                 }
@@ -76,6 +128,25 @@ namespace TaskManagementApp
 
             return temp;
         }
+        ObservableCollection<RealTask> FilterTasks(string label)
+        {
+            ObservableCollection<RealTask> temp = new ObservableCollection<RealTask>();
+
+            foreach (RealTask t in allTasks)
+            {
+                //if the label is found in labels list of task
+                foreach (string l in t.Labels)
+                {
+                    if (l.Equals(label))
+                    {
+                        temp.Add(t);
+                    }
+                }
+            }
+
+            return temp;
+        }
+
         #endregion
     }
 }
