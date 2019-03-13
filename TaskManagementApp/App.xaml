@@ -4,6 +4,56 @@
              xmlns:local="clr-namespace:TaskManagementApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="WideButtons" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Foreground" Value="#FFF3EBEB"/>
+            <Setter Property="BorderBrush" Value="#FFF3EBEB"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C34F0" Offset="0.539"/>
+                        <GradientStop Color="#FF16127C" Offset="1.2"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SmallerButtons" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="MinWidth" Value="80"/>
+            <Setter Property="Foreground" Value="#FFF3EBEB"/>
+            <Setter Property="BorderBrush" Value="#FFF3EBEB"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C34F0" Offset="0.539"/>
+                        <GradientStop Color="#FF16127C" Offset="1.2"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SearchBox" TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="5,5,20,5"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="MinWidth" Value="70"/>
+            <Setter Property="Foreground" Value="#FFF3EBEB"/>
+            <Setter Property="BorderBrush" Value="#FFF3EBEB"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF3C34F0" Offset="0.539"/>
+                        <GradientStop Color="#FF16127C" Offset="1.2"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

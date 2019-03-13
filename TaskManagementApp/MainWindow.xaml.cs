@@ -20,9 +20,16 @@ namespace TaskManagementApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        TaskManager TM;
         public MainWindow()
         {
             InitializeComponent();
+            TM = new TaskManager();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            TasksLbx.ItemsSource = TM.allTasks;
         }
     }
 }

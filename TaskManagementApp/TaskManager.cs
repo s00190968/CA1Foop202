@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 
 namespace TaskManagementApp
 {
-    class TaskManager
+    public class TaskManager
     {
-        ObservableCollection<RealTask> allTasks;
-        ObservableCollection<RealTask> filteredTasks;
-        ObservableCollection<RealTask> completedTasks;
+        public ObservableCollection<RealTask> allTasks;
+        public ObservableCollection<RealTask> filteredTasks;
+        public ObservableCollection<RealTask> completedTasks;
 
         public TaskManager()
         {
@@ -154,6 +154,39 @@ namespace TaskManagementApp
                 foreach (string l in t.Labels)
                 {
                     if (l.Equals(label))
+                    {
+                        temp.Add(t);
+                    }
+                }
+            }
+
+            return temp;
+        }
+
+        #endregion
+
+        #region task searching
+
+        ObservableCollection<RealTask> SearchTasks(string word)
+        {
+            ObservableCollection<RealTask> temp = new ObservableCollection<RealTask>();
+
+            foreach (RealTask t in allTasks)
+            {
+                //if title contains the word
+                if (t.Title.Contains(word))
+                {
+                    temp.Add(t);
+                }
+                //if labels contain the word
+                if (t.Description.Contains(word))
+                {
+                    temp.Add(t);
+                }
+                //if description contains the word
+                foreach (string s in t.Labels)
+                {
+                    if (s.Contains(word))
                     {
                         temp.Add(t);
                     }

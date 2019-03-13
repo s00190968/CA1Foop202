@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskManagementApp"
         mc:Ignorable="d"
         Title="Task Manager" Height="450" Width="500"
-        BorderBrush="LightGray">
+        BorderBrush="LightGray" Loaded="Window_Loaded">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <LinearGradientBrush.RelativeTransform>
@@ -24,6 +24,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -32,11 +33,21 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="TasksLbx" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Grid.RowSpan="1" Margin="10" Padding="20" VerticalAlignment="Top" Width="250" Height="auto" MinHeight="100"/>
-        <Button x:Name="addTaskBtn" Content="New Task" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="5" Padding="5" VerticalAlignment="Top" Width="200"/>
-        <StackPanel  Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Width="200">
-            <Button x:Name="saveTasksBtn" Content="Save" Margin="5" Padding="5" VerticalAlignment="Top" Width="auto" MinWidth="80"/>
-            <Button x:Name="loadTasksBtn" Content="Load" Margin="5" Padding="5" VerticalAlignment="Top" Width="auto" MinWidth="80"/>
+        <ListBox x:Name="TasksLbx" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Grid.RowSpan="1" Margin="10" Padding="20" VerticalAlignment="Top" Width="250" Height="auto" MinHeight="100" BorderBrush="#FFF3EBEB" Background="#00000000" Foreground="#FFF3EBEB"/>
+        <Button x:Name="addTaskBtn" Content="New Task" Grid.Row="3" Grid.Column="0" Style="{StaticResource WideButtons}"/>
+        <StackPanel  Grid.Row="4" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Width="200">
+            <Button x:Name="saveTasksBtn" Content="Save" Style="{StaticResource SmallerButtons}"/>
+            <Button x:Name="loadTasksBtn" Content="Load" Style="{StaticResource SmallerButtons}"/>
         </StackPanel>
+        <ComboBox x:Name="categoriesCbx" HorizontalAlignment="Left" Margin="10,5,5,5" Grid.Row="1" VerticalAlignment="Center" MinWidth="120" BorderBrush="#FFF3EBEB" Foreground="#FFF3EBEB">
+            <ComboBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF3C34F0" Offset="0"/>
+                    <GradientStop Color="#FF16127C" Offset="1"/>
+                </LinearGradientBrush>
+            </ComboBox.Background>
+        </ComboBox>
+        <TextBox x:Name="searchTxBx" Grid.Row="1" Text="Search" Style="{StaticResource SearchBox}"/>
+
     </Grid>
 </Window>
