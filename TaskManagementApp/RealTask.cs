@@ -8,9 +8,13 @@ namespace TaskManagementApp
 {    
     public class RealTask:Task
     {
-        public PRIORITY_TYPES Priority { get; set; }
-        public DateTime DueDate { get; set; }
-        public string PersonInCharge { get; set; }
+        PRIORITY_TYPES pr;
+        DateTime dt;
+        string p;
+
+        public PRIORITY_TYPES Priority { get { return pr; } set { pr = value; RaisePropertyChanged("Priority"); } }
+        public DateTime DueDate { get { return dt; } set { dt = value; RaisePropertyChanged("DueDate"); } }
+        public string PersonInCharge { get { return p; } set { p = value; RaisePropertyChanged("PersonInCharge"); } }
 
         public RealTask(string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge) : base(title, description, category)
         {
@@ -21,7 +25,7 @@ namespace TaskManagementApp
 
         public override string ToString()
         {
-            return base.ToString() + string.Format($"Due: {DueDate.ToShortDateString()}/nPriority: {Priority}/nPerson in charge: {PersonInCharge}");
+            return base.ToString() + string.Format($"Due: {DueDate.ToShortDateString()}");
         }
     }
 }
