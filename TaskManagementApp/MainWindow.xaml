@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskManagementApp"
         mc:Ignorable="d"
         Title="Task Manager" Height="450" Width="500"
-        BorderBrush="LightGray" Loaded="Window_Loaded">
+        BorderBrush="#FF3C34F0" Loaded="Window_Loaded" Foreground="#FFF3EBEB">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <LinearGradientBrush.RelativeTransform>
@@ -21,7 +21,10 @@
             <GradientStop Color="Black" Offset="1.2"/>
         </LinearGradientBrush>
     </Window.Background>
-    <Grid>
+    <Window.Resources>
+        <local:TaskManager x:Key="tm"></local:TaskManager>
+    </Window.Resources>
+    <Grid Name="MainGrid" DataContext="{StaticResource tm}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="auto"/>
@@ -48,6 +51,29 @@
             </ComboBox.Background>
         </ComboBox>
         <TextBox x:Name="searchTxBx" Grid.Row="1" Text="Search" Style="{StaticResource SearchBox}"/>
+        <StackPanel Style="{StaticResource stackPanelSelectedTask}" Grid.Column="1" Grid.Row="0" Grid.RowSpan="5">
+        <TextBlock x:Name="TaskTitleTblk" HorizontalAlignment="Left" Margin="15,5,5,5" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" FontSize="18" Text="Task title" Foreground="#FFB9ACAC" MinHeight="20" MinWidth="100"/>
+            <StackPanel Style="{StaticResource stackPanelLeft}">
+                <Label x:Name="CategoryLbl" Content="Category" Style="{StaticResource stackLabels}"/>
+                <TextBlock x:Name="CategoryTlblk" Style="{StaticResource stackTxBlocks}" Text="Category"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource stackPanelLeft}">
+                <Label x:Name="PriorityLbl" Content="Priority" Style="{StaticResource stackLabels}"/>
+                <TextBlock x:Name="PriorityTlblk" Style="{StaticResource stackTxBlocks}" Text="Priority"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource stackPanelLeft}">
+                <Label x:Name="DescripionLbl" Content="Descrption" Style="{StaticResource stackLabels}"/>
+                <TextBlock x:Name="DescriptionTlblk" Style="{StaticResource stackTxBlocks}" Text="Lorem ipsum dolor sit amet."/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource stackPanelLeft}">
+                <Label x:Name="LabelsLbl" Content="Labels" Style="{StaticResource stackLabels}"/>
+                <TextBlock x:Name="LabelsTlblk" Style="{StaticResource stackTxBlocks}" Text="label1, label2"/>
+            </StackPanel>
+            <StackPanel Style="{StaticResource stackPanelLeft}">
+                <Label x:Name="DueDateLbl" Content="Due date" Style="{StaticResource stackLabels}"/>
+                <TextBlock x:Name="DueDateTlblk" Style="{StaticResource stackTxBlocks}" Text="ddmmyyyy"/>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Window>
