@@ -21,7 +21,6 @@ namespace TaskManagementApp
             filteredTasks = new ObservableCollection<RealTask>();
             completedTasks = new ObservableCollection<RealTask>();
 
-            saveDataToJson();
             loadDataFromJson();
         }
 
@@ -78,16 +77,16 @@ namespace TaskManagementApp
 
         #endregion
 
-        public void addLabelsToTask(Task task, params string[]values)
+        public void addLabelsToTask(Task task, params string[] values)
         {
-            foreach(string s in values)
+            foreach (string s in values)
             {
                 task.Labels.Add(s);
             }
         }
 
         #region task filtering
-        ObservableCollection<RealTask> FilterTasks(DateTime date)
+        public ObservableCollection<RealTask> FilterTasks(DateTime date)
         {
             ObservableCollection<RealTask> temp = new ObservableCollection<RealTask>();
 
@@ -113,7 +112,7 @@ namespace TaskManagementApp
             return temp;
         }
 
-        ObservableCollection<RealTask> FilterTasks(CATEGORY category)
+        public ObservableCollection<RealTask> FilterTasks(CATEGORY category)
         {
             ObservableCollection<RealTask> temp = new ObservableCollection<RealTask>();
 
@@ -129,7 +128,7 @@ namespace TaskManagementApp
             return temp;
         }
 
-        ObservableCollection<RealTask> FilterTasks(PRIORITY_TYPES priority)
+        public ObservableCollection<RealTask> FilterTasks(PRIORITY_TYPES priority)
         {
             ObservableCollection<RealTask> temp = new ObservableCollection<RealTask>();
 
@@ -144,7 +143,7 @@ namespace TaskManagementApp
 
             return temp;
         }
-        ObservableCollection<RealTask> FilterTasks(string label)
+        public ObservableCollection<RealTask> FilterTasks(string label)
         {
             ObservableCollection<RealTask> temp = new ObservableCollection<RealTask>();
 
@@ -167,7 +166,7 @@ namespace TaskManagementApp
 
         #region task searching
 
-        ObservableCollection<RealTask> SearchTasks(string word)
+        public ObservableCollection<RealTask> SearchTasks(string word)
         {
             ObservableCollection<RealTask> temp = new ObservableCollection<RealTask>();
 

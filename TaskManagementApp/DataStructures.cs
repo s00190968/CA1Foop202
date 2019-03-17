@@ -11,10 +11,5 @@ namespace TaskManagementApp
 
     public class DataStrucutres
     {
-        public string[] imgNames;
-        public DataStrucutres()
-        {
-            imgNames = new string[] { "home.jpg", "work.jpg", "school.jpg", "leisure.jpg" };
-        }
     }
 }
