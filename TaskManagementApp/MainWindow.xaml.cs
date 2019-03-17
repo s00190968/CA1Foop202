@@ -34,6 +34,7 @@ namespace TaskManagementApp
             TM.AddTask("Example Task", "This is an example task", CATEGORY.Leisure, PRIORITY_TYPES.Low, DateTime.Now, "Marky Mark");
             TasksLbx.ItemsSource = TM.allTasks;
             categoriesCbx.ItemsSource = categories;
+            categoriesCbx.SelectedIndex = 0;
         }
 
         private void CategoriesCbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
