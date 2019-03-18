@@ -18,10 +18,27 @@ namespace TaskManagementApp
     /// Interaction logic for AddTaskWindow.xaml
     /// </summary>
     public partial class AddTaskWindow : Window
-    {
+    { 
         public AddTaskWindow()
         {
             InitializeComponent();
+        }
+
+        private void AddTasksBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow main = (MainWindow)Owner;
+
+            string title = TitleTxBx.Text;
+            string description = DescriptionTxBx.Text;
+            int cat = CategoryCmbx.SelectedIndex;
+            int pr = PriorityCmbx.SelectedIndex;
+            DateTime due = DueDatePicker.SelectedDate.Value;
+            string person = PersonChargeTxBx.Text;
+
+            CATEGORY chosenCat = main.TM.getCategory(cat);
+
+            RealTask temp = new RealTask(title, description, chosenCat, pr, due, person);
+            main.TM.AddTask(temp);
         }
     }
 }

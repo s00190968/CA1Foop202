@@ -20,7 +20,7 @@ namespace TaskManagementApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        TaskManager TM;
+        public TaskManager TM;
         string[] categories = { "All", "Home", "Work", "School", "Leisure" };
         public static string[] imgSources ={ "images/home.png", "images/work.png", "images/school.png", "images/leisure.png" };
         public MainWindow()
@@ -75,7 +75,9 @@ namespace TaskManagementApp
 
         private void AddTaskBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            AddTaskWindow addTaskWindow = new AddTaskWindow();
+            addTaskWindow.Owner = this;
+            addTaskWindow.ShowDialog();
         }
 
         private void SaveTasksBtn_Click(object sender, RoutedEventArgs e)

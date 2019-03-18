@@ -196,5 +196,53 @@ namespace TaskManagementApp
         }
 
         #endregion
+
+        public CATEGORY getCategory(int i)
+        {
+            CATEGORY chosen = CATEGORY.Home;
+            switch (i)
+            {
+                case 0:
+                    chosen = CATEGORY.Home;
+                    break;
+                case 1:
+                    chosen = CATEGORY.Work;
+                    break;
+                case 2:
+                    chosen = CATEGORY.School;
+                    break;
+                case 3:
+                    chosen = CATEGORY.Leisure;
+                    break;
+            }
+            return chosen;
+        }
+
+        public PRIORITY_TYPES getPriority(int i)
+        {
+            PRIORITY_TYPES chosen = PRIORITY_TYPES.HyperUrgent;
+            switch (i)
+            {
+                case 0:
+                    chosen = PRIORITY_TYPES.Low;
+                    break;
+                case 1:
+                    chosen = PRIORITY_TYPES.Normal;
+                    break;
+                case 2:
+                    chosen = PRIORITY_TYPES.Medium;
+                    break;
+                case 3:
+                    chosen = PRIORITY_TYPES.Urgent;
+                    break;
+                case 4:
+                    chosen = PRIORITY_TYPES.SuperUrgent;
+                    break;
+                case 5:
+                    chosen = PRIORITY_TYPES.HyperUrgent;
+                    break;
+            }
+            return chosen;
+        }
     }
 }
