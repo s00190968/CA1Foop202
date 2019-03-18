@@ -6,21 +6,8 @@
         xmlns:local="clr-namespace:TaskManagementApp"
         mc:Ignorable="d"
         Title="Task Manager" Height="450" Width="550"
-        BorderBrush="#FF3C34F0" Loaded="Window_Loaded" Foreground="#FFF3EBEB">
-    <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <LinearGradientBrush.RelativeTransform>
-                <TransformGroup>
-                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                    <RotateTransform Angle="-21.801" CenterY="0.5" CenterX="0.5"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </LinearGradientBrush.RelativeTransform>
-            <GradientStop Color="#FF3C34F0" Offset="0.539"/>
-            <GradientStop Color="Black" Offset="1.2"/>
-        </LinearGradientBrush>
-    </Window.Background>
+        Loaded="Window_Loaded"
+        Style="{StaticResource windowColours}">
     <Window.Resources>
         <DataTemplate x:Key="taksTemplate">
             <StackPanel Orientation="Horizontal">
