@@ -36,9 +36,18 @@ namespace TaskManagementApp
             string person = PersonChargeTxBx.Text;
 
             CATEGORY chosenCat = main.TM.getCategory(cat);
+            PRIORITY_TYPES chosePr = main.TM.getPriority(pr);
 
-            RealTask temp = new RealTask(title, description, chosenCat, pr, due, person);
-            main.TM.AddTask(temp);
+            string[] labels = LabelsTxBx.Text.Split(' ');
+
+            main.TM.AddTask(title, description, chosenCat, chosePr, due, person, labels);
+
+            this.Close();
+        }
+
+        private void CancelTasksBtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

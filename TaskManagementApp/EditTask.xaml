@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TaskManagementApp"
         mc:Ignorable="d"
         Title="EditTask" Height="450" Width="300"
-        Style="{StaticResource windowColours}">
+        Style="{StaticResource windowColours}" Loaded="Window_Loaded">
     <Grid>
         <StackPanel Style="{StaticResource stackPanelAddTask}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5">
             <StackPanel Style="{StaticResource stackPanelLeft}">
@@ -56,8 +56,8 @@
                 <TextBox x:Name="PersonChargeTxBx" Style="{StaticResource stackTxBox}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" Margin="20">
-                <Button x:Name="saveTasksBtn" Content="Save" Style="{StaticResource SmallerButtons}"/>
-                <Button x:Name="cancelTasksBtn" Content="Cancel" Style="{StaticResource SmallerButtons}"/>
+                <Button x:Name="saveTasksBtn" Content="Save" Style="{StaticResource SmallerButtons}" Click="SaveTasksBtn_Click"/>
+                <Button x:Name="cancelTasksBtn" Content="Cancel" Style="{StaticResource SmallerButtons}" Click="CancelTasksBtn_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -58,7 +58,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="200" Margin="20">
                 <Button x:Name="addTasksBtn" Content="Add" Style="{StaticResource SmallerButtons}" Click="AddTasksBtn_Click"/>
-                <Button x:Name="cancelTasksBtn" Content="Cancel" Style="{StaticResource SmallerButtons}"/>
+                <Button x:Name="cancelTasksBtn" Content="Cancel" Style="{StaticResource SmallerButtons}" Click="CancelTasksBtn_Click"/>
             </StackPanel>
         </StackPanel>
     </Grid>

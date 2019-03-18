@@ -16,7 +16,7 @@ namespace TaskManagementApp
         public DateTime DueDate { get { return dt; } set { dt = value; RaisePropertyChanged("DueDate"); } }
         public string PersonInCharge { get { return p; } set { p = value; RaisePropertyChanged("PersonInCharge"); } }
 
-        public RealTask(string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge) : base(title, description, category)
+        public RealTask(string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge, string[] labels) : base(title, description, category, labels)
         {
             Priority = priority;
             DueDate = dueDate;

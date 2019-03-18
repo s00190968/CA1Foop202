@@ -20,12 +20,22 @@ namespace TaskManagementApp
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Task(string title, string description, CATEGORY category)
+        public Task(string title, string description, CATEGORY category, string[] labels)
         {
             Title = title;
             Description = description;
             taskCategory = category;
             Labels = new List<string>();
+
+            addLabels(labels);
+        }
+
+        public void addLabels(string[] values)
+        {
+            foreach (string s in values)
+            {
+                Labels.Add(s);
+            }
         }
 
         protected void RaisePropertyChanged(string propertyName)

@@ -23,6 +23,7 @@ namespace TaskManagementApp
         public TaskManager TM;
         string[] categories = { "All", "Home", "Work", "School", "Leisure" };
         public static string[] imgSources ={ "images/home.png", "images/work.png", "images/school.png", "images/leisure.png" };
+        public RealTask selectedTask;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,40 +32,42 @@ namespace TaskManagementApp
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             TM = new TaskManager();
-            TM.AddTask("Example Task", "This is an example task", CATEGORY.Leisure, PRIORITY_TYPES.Low, DateTime.Now, "Marky Mark");
+            TM.loadDataFromJson();
             TasksLbx.ItemsSource = TM.allTasks;
             categoriesCbx.ItemsSource = categories;
             categoriesCbx.SelectedIndex = 0;
+            prioritiesCbx.SelectedIndex = 0;
+            DueDatePicker.SelectedDate = null;
         }
 
         private void CategoriesCbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            resetTasksListBoxItems();
             int index = categoriesCbx.SelectedIndex;
-            switch (index)
+
+            if(index == 0)
             {
-                case 0:
-                    TasksLbx.ItemsSource = TM.allTasks;
-                    break;
-                case 1:
-                    TasksLbx.ItemsSource = TM.FilterTasks(CATEGORY.Home);
-                    break;
-                case 2:
-                    TasksLbx.ItemsSource = TM.FilterTasks(CATEGORY.Work);
-                    break;
-                case 3:
-                    TasksLbx.ItemsSource = TM.FilterTasks(CATEGORY.School);
-                    break;
-                case 4:
-                    TasksLbx.ItemsSource = TM.FilterTasks(CATEGORY.Leisure);
-                    break;
+                TasksLbx.ItemsSource = TM.allTasks;
+            }
+            else
+            {
+                TasksLbx.ItemsSource = TM.FilterTasks(TM.getCategory(index - 1));
             }
         }
 
         private void SearchTxBx_TextChanged(object sender, TextChangedEventArgs e)
         {
+            resetTasksListBoxItems();
             if (TM != null)
             {
-                TasksLbx.ItemsSource = TM.FilterTasks(searchTxBx.Text);
+                if (searchTxBx.Text != "")
+                {
+                    TasksLbx.ItemsSource = TM.SearchTasks(searchTxBx.Text);
+                }
+                else
+                {
+                    TasksLbx.ItemsSource = TM.allTasks;
+                }
             }
         }
 
@@ -88,6 +91,7 @@ namespace TaskManagementApp
         private void LoadTasksBtn_Click(object sender, RoutedEventArgs e)
         {
             TM.loadDataFromJson();
+            TasksLbx.ItemsSource = TM.allTasks;
         }
 
         private void TasksLbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -105,6 +109,7 @@ namespace TaskManagementApp
                     LabelsTlblk.Text += label + ",";
                 }
                 DueDateTlblk.Text = temp.DueDate.ToShortDateString();
+                PersonChargeTlblk.Text = temp.PersonInCharge;
             }
             else
             {
@@ -114,6 +119,60 @@ namespace TaskManagementApp
                 DescriptionTlblk.Text = "";
                 LabelsTlblk.Text = "";
                 DueDateTlblk.Text = "";
+                PersonChargeTlblk.Text = "";
+            }
+        }
+
+        private void EditTasksBtn_Click(object sender, RoutedEventArgs e)
+        {
+            selectedTask = TasksLbx.SelectedItem as RealTask;
+            if (selectedTask != null)//only let user edit taks if selected task is not null
+            {
+                EditTask editTaskWindow = new EditTask();
+                editTaskWindow.Owner = this;
+                editTaskWindow.ShowDialog();
+            }
+        }
+
+        private void CompleteTasksBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RealTask temp = TasksLbx.SelectedItem as RealTask;
+            TM.CompeleteTask(temp);
+            TM.saveDataToJson();
+        }
+
+        private void DeleteTasksBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RealTask temp = TasksLbx.SelectedItem as RealTask;
+            TM.DeleteTask(temp);
+            TM.saveDataToJson();
+        }
+
+        void resetTasksListBoxItems()
+        {
+            TasksLbx.ItemsSource = null;
+        }
+
+        private void PrioritiesCbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            resetTasksListBoxItems();
+            int index = categoriesCbx.SelectedIndex;
+            if(index == 0)
+            {
+                TasksLbx.ItemsSource = TM.allTasks;
+            }
+            else
+            {
+                TasksLbx.ItemsSource = TM.FilterTasks(TM.getPriority(index - 1));
+            }
+        }
+
+        private void DueDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            resetTasksListBoxItems();
+            if (DueDatePicker.SelectedDate != null)
+            {
+                TM.FilterTasks(DueDatePicker.SelectedDate.Value);
             }
         }
     }

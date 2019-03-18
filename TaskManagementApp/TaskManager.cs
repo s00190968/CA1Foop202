@@ -24,9 +24,10 @@ namespace TaskManagementApp
             loadDataFromJson();
         }
 
-        public void AddTask(string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge)
+        public void AddTask(string title, string description, CATEGORY category, PRIORITY_TYPES priority, DateTime dueDate, string personInCharge,string[]labels)
         {
-            allTasks.Add(new RealTask(title, description, category, priority, dueDate, personInCharge));
+            allTasks.Add(new RealTask(title, description, category, priority, dueDate, personInCharge, labels));
+            saveDataToJson();
         }
 
         public void DeleteTask(RealTask task)
@@ -76,13 +77,10 @@ namespace TaskManagementApp
         }
 
         #endregion
-
-        public void addLabelsToTask(Task task, params string[] values)
+        //goes through all items in array and adds them to labels list
+        public void addLabelsToTask(Task task, string[] values)
         {
-            foreach (string s in values)
-            {
-                task.Labels.Add(s);
-            }
+            task.addLabels(values);
         }
 
         #region task filtering
@@ -108,7 +106,6 @@ namespace TaskManagementApp
                     temp.Add(t);
                 }
             }
-
             return temp;
         }
 
@@ -124,7 +121,6 @@ namespace TaskManagementApp
                     temp.Add(t);
                 }
             }
-
             return temp;
         }
 
@@ -140,7 +136,6 @@ namespace TaskManagementApp
                     temp.Add(t);
                 }
             }
-
             return temp;
         }
         public ObservableCollection<RealTask> FilterTasks(string label)
@@ -158,7 +153,6 @@ namespace TaskManagementApp
                     }
                 }
             }
-
             return temp;
         }
 
@@ -178,16 +172,23 @@ namespace TaskManagementApp
                     temp.Add(t);
                 }
                 //if labels contain the word
-                if (t.Description.Contains(word))
+                else if (t.Description.Contains(word))
                 {
                     temp.Add(t);
                 }
-                //if description contains the word
-                foreach (string s in t.Labels)
+                else if (t.PersonInCharge.Contains(word))
                 {
-                    if (s.Contains(word))
+                    temp.Add(t);
+                }
+                else
+                {
+                    //if description contains the word
+                    foreach (string s in t.Labels)
                     {
-                        temp.Add(t);
+                        if (s.Contains(word))
+                        {
+                            temp.Add(t);
+                        }
                     }
                 }
             }
@@ -196,7 +197,7 @@ namespace TaskManagementApp
         }
 
         #endregion
-
+        //pass in an index from the comboboxes and get the corresponding category back
         public CATEGORY getCategory(int i)
         {
             CATEGORY chosen = CATEGORY.Home;
@@ -218,6 +219,7 @@ namespace TaskManagementApp
             return chosen;
         }
 
+        //pass in an index from the comboboxes and get the corresponding priority back
         public PRIORITY_TYPES getPriority(int i)
         {
             PRIORITY_TYPES chosen = PRIORITY_TYPES.HyperUrgent;
